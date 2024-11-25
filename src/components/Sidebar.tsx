@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import {
   LayoutGrid,
@@ -32,6 +30,8 @@ import {
   SidebarMenuSubButton,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
 
 const AppSidebar: React.FC = () => {
   return (
@@ -41,7 +41,7 @@ const AppSidebar: React.FC = () => {
           <img
             src="/logo.png"
             alt="MaxTax Alliance Logo"
-            className="w-auto transition-all duration-300 ease-in-out group-data-[collapsible=icon]:h-8 group-data-[collapsible=icon]:w-8 group-data-[collapsible=icon]:object-contain group-data-[state=expanded]:h-auto group-data-[state=expanded]:w-3/4"
+            className="w-auto transition-all duration-300 ease-in-out group-data-[collapsible=icon]:h-12 group-data-[collapsible=icon]:w-12 group-data-[collapsible=icon]:object-contain group-data-[state=expanded]:h-auto group-data-[state=expanded]:w-3/4"
           />
         </div>
       </SidebarHeader>
@@ -155,7 +155,25 @@ const AppSidebar: React.FC = () => {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-border p-4">
+      <SidebarFooter className="border-t border-border">
+        <div className="p-2">
+          <div className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
+            <Avatar className="h-8 w-8 shrink-0">
+              <AvatarImage
+                src="https://ideogram.ai/assets/image/lossless/response/b5zY7z9nRWCGKr_JikaFwg"
+                alt="Jane Doe"
+              />
+              <AvatarFallback>JD</AvatarFallback>
+            </Avatar>
+            <div className="min-w-0 group-data-[collapsible=icon]:hidden">
+              <p className="text-sm font-medium text-gray-900 truncate">
+                Jane Doe
+              </p>
+              <p className="text-xs text-gray-500 truncate">Tax Specialist</p>
+            </div>
+          </div>
+        </div>
+        <Separator className="my-2" />
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Settings">
@@ -176,11 +194,11 @@ const AppSidebar: React.FC = () => {
         </SidebarMenu>
       </SidebarFooter>
       <SidebarRail>
-        <div className="p-2">
+        <div className="p-2 flex items-center justify-center">
           <img
-            src="/logo-small.png"
+            src="/logo.png"
             alt="MaxTax Alliance Logo"
-            className="w-8 h-8 object-contain"
+            className="w-12 h-12 object-contain"
           />
         </div>
       </SidebarRail>
