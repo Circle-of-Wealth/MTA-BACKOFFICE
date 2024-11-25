@@ -52,13 +52,7 @@ const taxPreparers: TaxPreparer[] = [
 ];
 
 const Leaderboard: React.FC = () => {
-  const colors = [
-    "rgb(66, 99, 235)",
-    "rgb(239, 68, 128)",
-    "rgb(255, 122, 0)",
-    "rgb(168, 85, 247)",
-    "rgb(34, 197, 94)",
-  ];
+  const barColor = "#002868"; // Navy blue to match the logo
 
   const data = taxPreparers.map((preparer) => ({
     ...preparer,
@@ -117,14 +111,8 @@ const Leaderboard: React.FC = () => {
                 dataKey="clients"
                 radius={[4, 4, 4, 4]}
                 label={{ position: "right", fill: "#666" }}
-              >
-                {data.map((_, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={colors[index % colors.length]}
-                  />
-                ))}
-              </Bar>
+                fill={barColor}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>

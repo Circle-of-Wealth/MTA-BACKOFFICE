@@ -4,18 +4,22 @@ import { cn } from "@/lib/utils";
 interface HeaderProps {
   userName: string;
   userRole: string;
+  children?: React.ReactNode;
 }
 
-const lightGrayClass = "bg-gray-100";
+const headerClass = "bg-white";
 
-const Header: React.FC<HeaderProps> = ({ userName, userRole }) => {
+const Header: React.FC<HeaderProps> = ({ userName, userRole, children }) => {
   return (
-    <header className={cn(lightGrayClass, "shadow-sm z-10")}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-6">
-          <h1 className="text-3xl font-semibold text-[#002868]">
-            Welcome, {userName}
-          </h1>
+    <header className={cn(headerClass, "shadow-sm z-10")}>
+      <div className="max-w-7xl px-6 sm:px-8 2xl:px-3">
+        <div className="flex justify-between items-center py-8">
+          <div className="flex items-center space-x-4">
+            {children}
+            <h1 className="text-3xl font-semibold text-[#002868]">
+              Welcome, {userName}
+            </h1>
+          </div>
           <div className="flex items-center">
             <img
               className="h-12 w-12 rounded-full object-cover"

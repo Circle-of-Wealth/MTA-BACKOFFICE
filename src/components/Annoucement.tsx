@@ -50,21 +50,27 @@ const announcements: AnnouncementItem[] = [
 
 const Announcement: React.FC = () => {
   return (
-    <Card className="bg-gradient-to-br from-[#002868] to-[#001234] text-white h-[600px]">
-      <CardHeader className="p-4 flex flex-row items-center space-y-0">
-        <h2 className="text-xl font-bold tracking-wide">ANNOUNCEMENTS</h2>
-        <img src="/logo.png" alt="MaxTax Logo" className="h-8 ml-auto" />
+    <Card className="bg-white h-full">
+      <CardHeader className="p-3 flex flex-row items-center space-y-0">
+        <h2 className="text-lg font-bold tracking-wide text-[#002868]">
+          ANNOUNCEMENTS
+        </h2>
       </CardHeader>
       <CardContent className="p-0">
-        <ScrollArea className="h-[520px] px-4">
+        <ScrollArea className="h-[calc(100%-48px)] px-3">
           {announcements.map((announcement, index) => (
-            <div key={index} className="mb-6 last:mb-4">
-              <h3 className="text-red-500 font-bold">{announcement.title}</h3>
-              <p className="text-red-500 text-sm mb-1">
+            <div key={index} className="mb-4 last:mb-2">
+              <h3 className="text-red-600 font-bold text-sm">
+                {announcement.title}
+              </h3>
+              <p className="text-red-600 text-xs mb-1">
                 Maxtax - {announcement.date}
               </p>
               {announcement.content.map((line, lineIndex) => (
-                <p key={lineIndex} className="text-sm leading-relaxed">
+                <p
+                  key={lineIndex}
+                  className="text-xs leading-relaxed text-[#002868]"
+                >
                   {line}
                 </p>
               ))}

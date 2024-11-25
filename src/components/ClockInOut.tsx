@@ -38,7 +38,7 @@ const ClockInOut: React.FC = () => {
           className={`w-full py-3 rounded-md text-white font-medium flex items-center justify-center ${
             isClockIn
               ? "bg-red-500 hover:bg-red-600"
-              : "bg-green-500 hover:bg-green-600"
+              : "bg-[#002868] hover:bg-[#001a4d]"
           }`}
         >
           {isClockIn ? (
