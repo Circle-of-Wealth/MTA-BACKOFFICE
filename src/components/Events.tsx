@@ -73,9 +73,9 @@ const Events: React.FC = () => {
               "text-[#002868] rounded-md w-8 font-normal text-[0.8rem]",
             row: "flex justify-between w-full mt-2",
             cell: "relative text-center text-sm p-0 [&:has([aria-selected])]:bg-[#002868]/5 first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
-            day: "h-8 w-8 p-0 font-normal text-[#002868] hover:bg-[#002868]/10 rounded-md",
+            day: "h-8 w-8 p-0 font-normal text-[#002868] hover:bg-[#002868]/10 hover:text-[#002868] rounded-md",
             day_selected:
-              "bg-[#002868] text-white hover:bg-[#002868] hover:text-white focus:bg-[#002868] focus:text-white",
+              "bg-[#002868] text-white hover:bg-[#002868] hover:text-[#002868]focus:bg-[#002868] focus:text-white",
             day_today: "bg-[#002868] text-[#002868]",
             day_outside: "text-[#002868]/50 opacity-50 hover:bg-[#002868]/5",
             day_disabled: "text-[#002868]/50 opacity-50",

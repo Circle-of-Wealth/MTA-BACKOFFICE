@@ -1,5 +1,5 @@
 import React from "react";
-import { Trophy, TrendingUp, Users, DollarSign } from "lucide-react";
+import { Trophy, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Bar,
@@ -7,99 +7,66 @@ import {
   ResponsiveContainer,
   XAxis,
   YAxis,
-  Cell,
   Tooltip,
 } from "recharts";
 
 interface TaxPreparer {
   name: string;
-  location: string;
-  company: string;
   clients: number;
 }
 
 const taxPreparers: TaxPreparer[] = [
-  {
-    name: "John Doe",
-    location: "New York, NY",
-    company: "TaxPro Inc.",
-    clients: 120,
-  },
-  {
-    name: "Jane Smith",
-    location: "Los Angeles, CA",
-    company: "Smith & Co.",
-    clients: 115,
-  },
-  {
-    name: "Mike Johnson",
-    location: "Chicago, IL",
-    company: "MJ Tax Services",
-    clients: 105,
-  },
-  {
-    name: "Emily Brown",
-    location: "Houston, TX",
-    company: "Brown Tax Solutions",
-    clients: 98,
-  },
-  {
-    name: "David Lee",
-    location: "Phoenix, AZ",
-    company: "Lee Accounting",
-    clients: 92,
-  },
+  { name: "John D.", clients: 120 },
+  { name: "Jane S.", clients: 115 },
+  { name: "Mike J.", clients: 105 },
+  { name: "Emily B.", clients: 98 },
+  { name: "David L.", clients: 92 },
 ];
 
 const Leaderboard: React.FC = () => {
-  const barColor = "#002868"; // Navy blue to match the logo
-
-  const data = taxPreparers.map((preparer) => ({
-    ...preparer,
-    revenue: preparer.clients * 500,
-  }));
+  const gradientId = "blueGradient";
 
   return (
     <Card className="w-full">
       <CardHeader className="pb-2">
-        <CardTitle className="text-2xl font-bold text-[#002868] flex items-center gap-2">
-          <Trophy className="w-8 h-8 text-[#002868]" />
+        <CardTitle className="text-lg font-semibold text-[#002868] flex items-center gap-2">
+          <Trophy className="w-5 h-5 text-[#002868]" />
           Top Tax Preparers
         </CardTitle>
-        <p className="text-sm text-gray-500">Performance Overview</p>
       </CardHeader>
       <CardContent>
-        <div className="h-[400px]">
+        <div className="h-[200px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              data={data}
+              data={taxPreparers}
               layout="vertical"
-              margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
+              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
             >
-              <XAxis type="number" />
+              <defs>
+                <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#E6F3FF" />
+                  <stop offset="100%" stopColor="#002868" />
+                </linearGradient>
+              </defs>
+              <XAxis type="number" hide />
               <YAxis
                 dataKey="name"
                 type="category"
                 axisLine={false}
                 tickLine={false}
-                width={95}
+                width={50}
+                tick={{ fontSize: 12 }}
               />
               <Tooltip
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
                     const data = payload[0].payload;
                     return (
-                      <div className="bg-white p-4 rounded shadow-lg border border-gray-200">
+                      <div className="bg-white p-2 rounded shadow-lg border border-gray-200 text-xs">
                         <p className="font-bold">{data.name}</p>
-                        <p>{data.company}</p>
-                        <p>{data.location}</p>
-                        <p className="mt-2">
+                        <p>
                           <span className="font-semibold">Clients:</span>{" "}
                           {data.clients}
-                        </p>
-                        <p>
-                          <span className="font-semibold">Revenue:</span> $
-                          {data.revenue}
                         </p>
                       </div>
                     );
@@ -107,31 +74,14 @@ const Leaderboard: React.FC = () => {
                   return null;
                 }}
               />
-              <Bar
-                dataKey="clients"
-                radius={[4, 4, 4, 4]}
-                label={{ position: "right", fill: "#666" }}
-                fill={barColor}
-              />
+              <Bar dataKey="clients" fill={`url(#${gradientId})`} />
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <div className="mt-4 flex items-center justify-between text-sm">
-          <div className="flex items-center gap-4">
-            <p className="flex items-center">
-              <Users className="w-4 h-4 mr-1 text-[#002868]" />
-              <span className="font-medium">Total Clients:</span>{" "}
-              {data.reduce((sum, item) => sum + item.clients, 0)}
-            </p>
-            <p className="flex items-center">
-              <DollarSign className="w-4 h-4 mr-1 text-[#002868]" />
-              <span className="font-medium">Total Revenue:</span> $
-              {data.reduce((sum, item) => sum + item.revenue, 0)}
-            </p>
-          </div>
+        <div className="mt-2 flex items-center justify-end text-xs">
           <p className="flex items-center text-green-600 font-medium">
-            <TrendingUp className="w-4 h-4 mr-1" />
-            Trending up by 5.2% this month
+            <TrendingUp className="w-3 h-3 mr-1" />
+            5.2% increase this month
           </p>
         </div>
       </CardContent>

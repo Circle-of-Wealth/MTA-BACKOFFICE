@@ -158,12 +158,14 @@ const AppSidebar: React.FC = () => {
       <SidebarFooter className="border-t border-border">
         <div className="p-2">
           <div className="flex items-center gap-2 group-data-[collapsible=icon]:justify-center">
-            <Avatar className="h-8 w-8 shrink-0">
+            <Avatar className="h-9 w-9 rounded-lg">
               <AvatarImage
                 src="https://ideogram.ai/assets/image/lossless/response/b5zY7z9nRWCGKr_JikaFwg"
                 alt="Jane Doe"
               />
-              <AvatarFallback>JD</AvatarFallback>
+              <AvatarFallback className="rounded-lg bg-[#002868] text-white">
+                JD
+              </AvatarFallback>
             </Avatar>
             <div className="min-w-0 group-data-[collapsible=icon]:hidden">
               <p className="text-sm font-medium text-gray-900 truncate">

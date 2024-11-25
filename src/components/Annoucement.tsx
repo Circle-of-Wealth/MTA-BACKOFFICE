@@ -50,14 +50,14 @@ const announcements: AnnouncementItem[] = [
 
 const Announcement: React.FC = () => {
   return (
-    <Card className="bg-white h-full">
+    <Card className="bg-white h-[700px]">
       <CardHeader className="p-3 flex flex-row items-center space-y-0">
         <h2 className="text-lg font-bold tracking-wide text-[#002868]">
           ANNOUNCEMENTS
         </h2>
       </CardHeader>
       <CardContent className="p-0">
-        <ScrollArea className="h-[calc(100%-48px)] px-3">
+        <ScrollArea className="h-[calc(100vh-200px)] px-3">
           {announcements.map((announcement, index) => (
             <div key={index} className="mb-4 last:mb-2">
               <h3 className="text-red-600 font-bold text-sm">

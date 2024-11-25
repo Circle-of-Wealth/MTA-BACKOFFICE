@@ -62,7 +62,7 @@ const RecentActivity: React.FC = () => {
   const pendingTasks = "3";
 
   return (
-    <Card className="bg-white max-h-full overflow-hidden">
+    <Card className="bg-white h-[400px] overflow-hidden">
       <CardHeader>
         <CardTitle className="text-2xl font-semibold text-[#002868]">
           Recent Activity & Task Insights
