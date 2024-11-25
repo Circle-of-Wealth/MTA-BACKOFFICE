@@ -123,7 +123,7 @@ const RecentActivity: React.FC = () => {
                     <Progress
                       value={task.completionRate}
                       className="flex-grow h-2"
-                      indicatorClassName="bg-[#002868]"
+                      //   indicatorClassName="bg-[#002868]"
                     />
                     <span className="text-sm text-[#002868]/80 min-w-[45px]">
                       {task.completionRate}%
