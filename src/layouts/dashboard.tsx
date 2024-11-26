@@ -27,15 +27,15 @@ const Dashboard: React.FC = () => {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
                 <div className="lg:col-span-1 space-y-6">
                   <ClockInOut />
+                  <TotalClients />
+                  <Events />
+                </div>
+                <div className="lg:col-span-1 space-y-6">
                   <RecentActivity />
                   <Leaderboard />
                 </div>
                 <div className="lg:col-span-1">
                   <Announcement />
-                </div>
-                <div className="lg:col-span-1 space-y-6">
-                  <TotalClients />
-                  <Events />
                 </div>
               </div>
             </main>
