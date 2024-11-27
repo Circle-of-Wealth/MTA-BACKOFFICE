@@ -13,6 +13,10 @@ import {
   Settings,
   LogOut,
   ChevronDown,
+  Video,
+  FileQuestion,
+  Newspaper,
+  CheckSquare,
 } from "lucide-react";
 import {
   Sidebar,
@@ -32,6 +36,13 @@ import {
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 const AppSidebar: React.FC = () => {
   return (
@@ -56,28 +67,59 @@ const AppSidebar: React.FC = () => {
                   isActive
                   tooltip="Dashboard Overview"
                 >
-                  <a href="/" className="w-full">
+                  <Link to="/" className="w-full">
                     <LayoutGrid className="mr-2 h-4 w-4" />
                     <span>Dashboard Overview</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Time Tracking">
-                  <a href="/time" className="w-full">
+                  <Link to="/time" className="w-full">
                     <Clock className="mr-2 h-4 w-4" />
                     <span>Time Tracking</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Training Hub">
-                  <a href="/training" className="w-full">
-                    <School className="mr-2 h-4 w-4" />
-                    <span>Training Hub</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <Collapsible>
+                <SidebarMenuItem className="group/collapsible">
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton tooltip="Training Hub">
+                      <School className="mr-2 h-4 w-4" />
+                      <span>Training Hub</span>
+                      <ChevronDown className="ml-auto h-4 w-4 transition-transform duration-300 group-data-[state=open]/collapsible:rotate-180" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                </SidebarMenuItem>
+                <CollapsibleContent className="overflow-hidden transition-all duration-300 ease-in-out data-[state=closed]:animate-collapse data-[state=open]:animate-expand">
+                  <SidebarMenuSub className="transition-all duration-300 ease-in-out data-[state=closed]:opacity-0 data-[state=open]:opacity-100">
+                    <SidebarMenuSubItem>
+                      <SidebarMenuSubButton asChild>
+                        <Link to="/training/courses">
+                          <Video className="mr-2 h-4 w-4" />
+                          Courses
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                    <SidebarMenuSubItem>
+                      <SidebarMenuSubButton asChild>
+                        <Link to="/training/certifications">
+                          <FileQuestion className="mr-2 h-4 w-4" />
+                          Certifications
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                    <SidebarMenuSubItem>
+                      <SidebarMenuSubButton asChild>
+                        <Link to="/training/webinars">
+                          <Video className="mr-2 h-4 w-4" />
+                          Webinars
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </Collapsible>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -88,34 +130,58 @@ const AppSidebar: React.FC = () => {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Leaderboard">
-                  <a href="/leaderboard" className="w-full">
+                  <Link to="/leaderboard" className="w-full">
                     <Trophy className="mr-2 h-4 w-4" />
                     <span>Leaderboard</span>
-                  </a>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Tasks">
+                  <Link to="/tasks" className="w-full">
+                    <CheckSquare className="mr-2 h-4 w-4" />
+                    <span>Tasks</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Team Messenger">
+                  <Link to="/chat" className="w-full">
+                    <MessageSquare className="mr-2 h-4 w-4" />
+                    <span>Team Messenger</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Maxine AI">
+                  <Link to="/maxine" className="w-full">
+                    <Bot className="mr-2 h-4 w-4" />
+                    <span>Maxine AI</span>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Clients">
-                  <a href="/clients" className="w-full">
+                  <Link to="/clients" className="w-full">
                     <Users className="mr-2 h-4 w-4" />
                     <span>Clients</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Tax Software">
-                  <a href="/software" className="w-full">
+                  <Link to="/software" className="w-full">
                     <FileText className="mr-2 h-4 w-4" />
                     <span>Tax Software</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild tooltip="Reports">
-                  <a href="/reports" className="w-full">
+                  <Link to="/reports" className="w-full">
                     <BarChart3 className="mr-2 h-4 w-4" />
                     <span>Reports</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -126,30 +192,45 @@ const AppSidebar: React.FC = () => {
           <SidebarGroupLabel>Resources</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Resources">
-                  <a href="/resources" className="w-full">
-                    <BookOpen className="mr-2 h-4 w-4" />
-                    <span>Resources</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Team Messenger">
-                  <a href="/chat" className="w-full">
-                    <MessageSquare className="mr-2 h-4 w-4" />
-                    <span>Team Messenger</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Maxine AI">
-                  <a href="/maxine" className="w-full">
-                    <Bot className="mr-2 h-4 w-4" />
-                    <span>Maxine AI</span>
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              <Collapsible>
+                <SidebarMenuItem className="group/collapsible">
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton tooltip="Resources">
+                      <BookOpen className="mr-2 h-4 w-4" />
+                      <span>Resources</span>
+                      <ChevronDown className="ml-auto h-4 w-4 transition-transform duration-300 group-data-[state=open]/collapsible:rotate-180" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                </SidebarMenuItem>
+                <CollapsibleContent className="overflow-hidden transition-all duration-300 ease-in-out data-[state=closed]:animate-collapse data-[state=open]:animate-expand">
+                  <SidebarMenuSub className="transition-all duration-300 ease-in-out data-[state=closed]:opacity-0 data-[state=open]:opacity-100">
+                    <SidebarMenuSubItem>
+                      <SidebarMenuSubButton asChild>
+                        <Link to="/resources/knowledge-base">
+                          <BookOpen className="mr-2 h-4 w-4" />
+                          Knowledge Base
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                    <SidebarMenuSubItem>
+                      <SidebarMenuSubButton asChild>
+                        <Link to="/resources/forms">
+                          <FileText className="mr-2 h-4 w-4" />
+                          Forms & Documents
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                    <SidebarMenuSubItem>
+                      <SidebarMenuSubButton asChild>
+                        <Link to="/resources/news">
+                          <Newspaper className="mr-2 h-4 w-4" />
+                          Tax News
+                        </Link>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </Collapsible>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -179,18 +260,18 @@ const AppSidebar: React.FC = () => {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Settings">
-              <a href="/settings" className="w-full">
+              <Link to="/settings" className="w-full">
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Settings</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Logout">
-              <a href="/logout" className="w-full">
+              <Link to="/logout" className="w-full">
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Logout</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

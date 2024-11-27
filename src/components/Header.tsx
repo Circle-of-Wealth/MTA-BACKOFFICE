@@ -7,11 +7,9 @@ interface HeaderProps {
   children?: React.ReactNode;
 }
 
-const headerClass = "bg-white";
-
 const Header: React.FC<HeaderProps> = ({ userName, userRole, children }) => {
   return (
-    <header className={cn(headerClass, "shadow-sm z-10")}>
+    <header className={cn("bg-[#F8F9FA]", "shadow-sm z-10")}>
       <div className="max-w-7xl px-6 sm:px-8 lg:px-10">
         <div className="flex justify-between items-center pt-8 pb-2">
           <div className="flex items-center space-x-4">
