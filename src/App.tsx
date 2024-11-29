@@ -16,11 +16,12 @@ import Reports from "./layouts/reports";
 
 function App() {
   const { pathname: path } = useLocation();
+  console.log(path);
 
   return (
     <SidebarProvider>
       <div className="flex w-full h-screen bg-[#F8F9FA]">
-        <AppSidebar />
+        {path === "/signin" || path === "/signup" ? <></> : <AppSidebar />}
         <SidebarInset>
           {path === "/" ? (
             <Header userName="Jane Doe" userRole="Tax Specialist">

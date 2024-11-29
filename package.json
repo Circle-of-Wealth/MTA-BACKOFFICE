@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@auth/core": "^0.36.0",
+    "@convex-dev/auth": "^0.0.75",
     "@radix-ui/react-avatar": "^1.1.1",
     "@radix-ui/react-checkbox": "^1.1.2",
     "@radix-ui/react-collapsible": "^1.1.1",
@@ -25,6 +27,7 @@
     "@supabase/supabase-js": "^2.46.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "convex": "^1.17.3",
     "date-fns": "^3.6.0",
     "lucide-react": "^0.460.0",
     "papaparse": "^5.4.1",

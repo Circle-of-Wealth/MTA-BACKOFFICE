@@ -43,8 +43,13 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+import { useAuthActions } from "@convex-dev/auth/react";
+import { useNavigate } from "react-router-dom";
 
 const AppSidebar: React.FC = () => {
+  const { signOut } = useAuthActions();
+  const nav = useNavigate();
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="border-b border-border p-4">
@@ -267,8 +272,17 @@ const AppSidebar: React.FC = () => {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Logout">
-              <Link to="/logout" className="w-full">
+            <SidebarMenuButton
+              onClick={async (e: any) => {
+                e.preventDefault();
+                console.log("Signing out");
+                await signOut();
+                nav("/signin");
+              }}
+              asChild
+              tooltip="Logout"
+            >
+              <Link to="/signin" className="w-full">
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Logout</span>
               </Link>

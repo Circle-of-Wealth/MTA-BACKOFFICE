@@ -1,6 +1,7 @@
 import { TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
-
+import { useQuery } from "convex/react";
+import { api } from "convex/_generated/api";
 import {
   Card,
   CardContent,
@@ -15,7 +16,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-const chartData = [
+import { useEffect, useState } from "react";
+const employeeData = [
   { month: "January", desktop: 186, mobile: 80 },
   { month: "February", desktop: 305, mobile: 200 },
   { month: "March", desktop: 237, mobile: 120 },
@@ -25,50 +27,50 @@ const chartData = [
 ];
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  revenue: {
+    label: "Total Revenue",
     color: "hsl(var(--chart-1))",
   },
-  mobile: {
-    label: "Mobile",
+  fees: {
+    label: "Fees",
     color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
 
-export default function Report() {
+export default function Report({ data }: { data: any }) {
+  const currentYear = new Date().getFullYear().toString();
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Multiple</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Tax Preparer Overview</CardTitle>
+        <CardDescription>{`${currentYear} Tax Season`}</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
+          <BarChart accessibilityLayer data={data}>
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
-              tickLine={false}
+              dataKey="preparer_name"
+              tickLine={true}
               tickMargin={10}
-              axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
+              axisLine={true}
+              tickFormatter={(value) => value.split(" ")[0]}
             />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent indicator="dashed" />}
+              content={<ChartTooltipContent indicator="line" />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-            <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+            <Bar dataKey="revenue" fill="var(--color-revenue)" radius={4} />
+            <Bar dataKey="fees" fill="var(--color-fees)" radius={4} />
           </BarChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          Tax Preparer Profit & Loss Overview
         </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
-        </div>
+        <div className="leading-none text-muted-foreground"></div>
       </CardFooter>
     </Card>
   );
