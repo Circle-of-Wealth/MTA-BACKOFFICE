@@ -23,7 +23,7 @@ const Dashboard: React.FC = () => {
       Math.random() * 100 * parseInt(data["Tax_Prep_Fee"].replace("$", ""))
     );
 
-    const fees = Math.round(Math.random() * 100) * 16 * 25;
+    const fees = Math.round(Math.random() * 100) * 16 * 14;
 
     return { revenue, fees, ...data };
   });

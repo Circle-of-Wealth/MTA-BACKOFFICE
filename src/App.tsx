@@ -27,6 +27,8 @@ function App() {
             <Header userName="Jane Doe" userRole="Tax Specialist">
               <SidebarTrigger className="text-[#002868] hover:bg-gray-100 p-2 rounded-md transition-colors duration-200" />
             </Header>
+          ) : path === "/signin" || path === "/signup" ? (
+            <></>
           ) : (
             <div className="max-w-7xl px-6 sm:px-8 lg:px-10">
               <div className="flex justify-between items-center pt-8">

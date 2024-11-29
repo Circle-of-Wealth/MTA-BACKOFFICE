@@ -50,7 +50,7 @@ const announcements: AnnouncementItem[] = [
 
 const Announcement: React.FC = () => {
   return (
-    <Card className="bg-white h-[700px]">
+    <Card className="bg-white h-[400px] overflow-scroll">
       <CardHeader className="p-3 flex flex-row items-center space-y-0">
         <h2 className="text-lg font-bold tracking-wide text-[#002868]">
           ANNOUNCEMENTS

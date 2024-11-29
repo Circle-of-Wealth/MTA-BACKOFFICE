@@ -4,8 +4,8 @@
 @layer base {
   :root {
     --radius: 0.5rem;
-    --chart-1: 220 70% 50%;
-    --chart-2: 340 75% 55%;
+    --chart-1: 0, 100%, 45%;
+    --chart-2: 220, 100%, 20%;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;

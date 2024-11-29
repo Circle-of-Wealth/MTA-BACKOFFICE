@@ -16,43 +16,51 @@ interface Task {
 const tasks: Task[] = [
   {
     id: 1,
-    name: "Tax Return: John Doe",
-    status: "completed",
-    completionRate: 100,
-    deadline: "2023-12-15",
+    name: "2-Day Tax Training",
+    status: "in-progress",
+    completionRate: 50,
+    deadline: "2023-12-06",
     priority: "high",
   },
   {
     id: 2,
-    name: "Quarterly Report: XYZ Corp",
+    name: "First Goal: 30 Clients by Jan 31",
     status: "in-progress",
-    completionRate: 75,
-    deadline: "2023-12-31",
-    priority: "medium",
+    completionRate: 10,
+    deadline: "2024-01-31",
+    priority: "high",
   },
   {
     id: 3,
-    name: "Audit Preparation: ABC Inc",
-    status: "delayed",
+    name: "Daily Marketing via Social Media",
+    status: "in-progress",
     completionRate: 30,
-    deadline: "2024-01-15",
+    deadline: "Daily",
     priority: "high",
   },
   {
     id: 4,
-    name: "Financial Statement: Jane Smith",
-    status: "completed",
-    completionRate: 100,
-    deadline: "2023-12-10",
-    priority: "medium",
+    name: "Flyering an Apartment Complex",
+    status: "in-progress",
+    completionRate: 20,
+    deadline: "Daily",
+    priority: "high",
   },
   {
     id: 5,
-    name: "Tax Planning: New Client",
+    name: "Drop 10 Yard Signs",
     status: "in-progress",
-    completionRate: 50,
-    deadline: "2024-01-31",
-    priority: "low",
+    completionRate: 15,
+    deadline: "Every 2 days",
+    priority: "medium",
+  },
+  {
+    id: 6,
+    name: "Long-term Goal: 100 Clients by Apr 15",
+    status: "in-progress",
+    completionRate: 15,
+    deadline: "2024-04-15",
+    priority: "high",
   },
 ];
 
@@ -111,7 +119,10 @@ const RecentActivity: React.FC = () => {
               </div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-[#002868]/80">
-                  Deadline: {new Date(task.deadline).toLocaleDateString()}
+                  Deadline:{" "}
+                  {typeof task.deadline === "string"
+                    ? `${task.deadline}`
+                    : new Date(task.deadline).toLocaleDateString()}
                 </span>
                 <span
                   className="text-sm font-medium"
@@ -120,8 +131,8 @@ const RecentActivity: React.FC = () => {
                       task.priority === "high"
                         ? "#ef4444"
                         : task.priority === "medium"
-                        ? "#f59e0b"
-                        : "#10b981",
+                          ? "#f59e0b"
+                          : "#10b981",
                   }}
                 >
                   {task.priority.charAt(0).toUpperCase() +

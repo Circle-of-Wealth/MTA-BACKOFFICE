@@ -1,63 +1,110 @@
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, TrendingUp } from "lucide-react";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+"use client";
 
-interface ClientData {
-  name: string;
-  value: number;
-  color: string;
-}
+import { TrendingUp } from "lucide-react";
+import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts";
 
-const TotalClients: React.FC = () => {
-  const totalClients = 530; // Sum of all clients
-  const growthRate = 5.2; // Growth rate in percentage
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+const chartData = [{ month: "january", desktop: 100, mobile: 30 }];
 
-  const data: ClientData[] = [
-    { name: "Active", value: 350, color: "rgb(66, 99, 235)" },
-    { name: "New", value: 98, color: "rgb(239, 68, 128)" },
-    { name: "Returning", value: 82, color: "rgb(255, 122, 0)" },
-  ];
+const chartConfig = {
+  desktop: {
+    label: "Desktop",
+    color: "hsl(var(--chart-1))",
+  },
+  mobile: {
+    label: "Mobile",
+    color: "hsl(var(--chart-2))",
+  },
+} satisfies ChartConfig;
+
+export default function TotalClients() {
+  const totalVisitors = chartData[0].desktop + chartData[0].mobile;
 
   return (
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-semibold text-[#002868] flex items-center gap-2">
-          <Users className="w-5 h-5" />
-          Total Clients
-        </CardTitle>
+    <Card className="flex flex-col">
+      <CardHeader className="items-center pb-0">
+        <CardTitle>Clients E-Filed vs Goal</CardTitle>
+        <CardDescription>{`${new Date().getFullYear()} Tax Season`}</CardDescription>
       </CardHeader>
-      <CardContent className="pt-2">
-        <div className="relative h-[200px] flex items-center justify-center">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={data}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={80}
-                paddingAngle={2}
-                dataKey="value"
-              >
-                {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-            </PieChart>
-          </ResponsiveContainer>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-4xl font-bold">{totalClients}</span>
-            <span className="text-sm text-gray-500">Total Clients</span>
-          </div>
-        </div>
-        <div className="flex items-center justify-center mt-2 text-sm text-green-600 font-medium">
-          <TrendingUp className="w-4 h-4 mr-1" />
-          Up by {growthRate}% this month
-        </div>
+      <CardContent className="flex flex-1 items-center pb-0">
+        <ChartContainer
+          config={chartConfig}
+          className="mx-auto aspect-square w-full max-w-[250px]"
+        >
+          <RadialBarChart
+            data={chartData}
+            endAngle={180}
+            innerRadius={80}
+            outerRadius={130}
+          >
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
+            <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+              <Label
+                content={({ viewBox }) => {
+                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                    return (
+                      <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle">
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) - 16}
+                          className="fill-foreground text-2xl font-bold"
+                        >
+                          {totalVisitors.toLocaleString()}
+                        </tspan>
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) + 4}
+                          className="fill-muted-foreground"
+                        >
+                          Total Clients
+                        </tspan>
+                      </text>
+                    );
+                  }
+                }}
+              />
+            </PolarRadiusAxis>
+            <RadialBar
+              dataKey="desktop"
+              stackId="a"
+              cornerRadius={5}
+              fill="var(--color-desktop)"
+              className="stroke-transparent stroke-2"
+            />
+            <RadialBar
+              dataKey="mobile"
+              fill="var(--color-mobile)"
+              stackId="a"
+              cornerRadius={5}
+              className="stroke-transparent stroke-2"
+            />
+          </RadialBarChart>
+        </ChartContainer>
       </CardContent>
+      <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 font-medium leading-none">
+          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+        </div>
+        <div className="leading-none text-muted-foreground">
+          Showing total clients for the tax season
+        </div>
+      </CardFooter>
     </Card>
   );
-};
-
-export default TotalClients;
+}
